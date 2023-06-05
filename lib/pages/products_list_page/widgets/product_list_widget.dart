@@ -48,8 +48,8 @@ class ProductListWidget extends StatelessWidget {
                   Text( "Age :  ${product.age}") , 
                   const Spacer(),
                   Text("Gender : ${product.gender}"),
-                  const  Spacer(),
-                  Text( "Date : ${ DateTime.parse(product.dateOfBirth!).toString().substring(0 ,10) } " ),
+                  // const  Spacer(),
+                  // Text( "Date : ${ DateTime.parse(product.dateOfBirth!).toString().substring(0 ,10) } " ),
                 ],
               ),
 
