@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_testing/models/product_list_model.dart';
-import 'package:flutter_testing/pages/products_page/products_page.dart';
+
+import '../../products_page/products_page.dart';
 
 class ProductListWidget extends StatelessWidget {
   final ProductListModel product;
@@ -23,41 +24,37 @@ class ProductListWidget extends StatelessWidget {
       ),
       child: InkWell(
       onTap: () => Navigator.of(context).push( MaterialPageRoute(
-      builder: (BuildContext context) => ProductsPage(product : product)),
-    ),
+      builder: (BuildContext context) => ProductsPage(product : product))  ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 130,
-              decoration: const BoxDecoration(
-                 borderRadius: BorderRadius.only(topLeft: Radius.circular(12) , topRight: Radius.circular(12) ),
+              height: 120,
+              decoration: BoxDecoration(
+                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(12) , topRight: Radius.circular(12) ),
                 image:  DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage("https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg?auto=compress&cs=tinysrgb&w=600"))
+                  image: NetworkImage(product.image))
               ), 
             ),
             Padding(
-              padding: const  EdgeInsets.symmetric(horizontal: 12 ,vertical: 3),
-              child: Text(product.productName ?? "" , textAlign: TextAlign.left,  style: const TextStyle(fontSize: 16 , height: 1.8 , fontWeight: FontWeight.bold , color: Colors.black87 ), )),
+              padding: const  EdgeInsets.symmetric(horizontal: 10 ,vertical: 5),
+              child: Text(product.categoryName , textAlign: TextAlign.left,  style: const TextStyle(fontSize: 16 , height: 1.8 , fontWeight: FontWeight.bold , color: Colors.black87 ), )),
+              Padding(
+              padding: const EdgeInsets.only( left: 10),
+              child: Text(product.description  , textAlign: TextAlign.right, style: const  TextStyle(fontWeight: FontWeight.bold , fontSize: 14), ),
+            ),
             Padding(
-              padding: const  EdgeInsets.symmetric(horizontal: 12 ,vertical: 14),
-              child: Row(
-                children: [
-                  Text( "Age :  ${product.age}") , 
-                  const Spacer(),
-                  Text("Gender : ${product.gender}"),
-                  // const  Spacer(),
-                  // Text( "Date : ${ DateTime.parse(product.dateOfBirth!).toString().substring(0 ,10) } " ),
-                ],
-              ),
+              padding: const  EdgeInsets.symmetric(horizontal: 10 , vertical: 10 ),
+              child: RichText( 
+                   text : TextSpan( text: "price : "  , 
+                  style: const  TextStyle(color: Colors.black , fontWeight: FontWeight.bold ),
+                   children: [ 
+                      TextSpan(text: product.price.toString() , style: const  TextStyle(color:Color.fromARGB(255, 4, 86, 6) , fontWeight: FontWeight.bold ) )
+              ] ) )  
 
             ) ,
-            Padding(
-              padding: const EdgeInsets.only( left: 8 , right: 12 , bottom: 17),
-              child: Text( "Discount : ${product.discount} " , textAlign: TextAlign.right, style: const  TextStyle(fontWeight: FontWeight.bold , fontSize: 14), ),
-            )
           ],
         ),
       ),
